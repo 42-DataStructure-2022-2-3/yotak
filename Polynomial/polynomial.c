@@ -131,20 +131,18 @@ LinkedList*	addPolyNode(LinkedList *a, LinkedList *b)
 			newNode = createNode(aNode->coef + bNode->coef, aNode->degree);
 			aNode = aNode->pLink;
 			bNode = bNode->pLink;
-			addLLElement(ret, i, newNode);
 		}
 		else if (aNode->degree > bNode->degree)
 		{
 			newNode = createNode(aNode->coef, aNode->degree);
 			aNode = aNode->pLink;
-			addLLElement(ret, i, newNode);
 		}
 		else if (aNode->degree < bNode->degree)
 		{
 			newNode = createNode(bNode->coef, bNode->degree);
 			bNode = bNode->pLink;
-			addLLElement(ret, i, newNode);
 		}
+		addLLElement(ret, i, newNode);
 		i++;
 	}
 	if (aNode == NULL)
