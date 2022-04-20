@@ -1,4 +1,4 @@
-#include "doublylist.h"
+#include "doublyList.h"
 
 DoublyList* createDoublyList()
 {
@@ -33,7 +33,8 @@ int addDLElement(DoublyList* pList, int position, DoublyListNode element)
         pNode = pNode->pRLink;
     newNode->pLLink = pNode;
     newNode->pRLink = pNode->pRLink;
-    pNode->pRLink->pLLink = newNode;
+    if (position != pList->currentElementCount - 1)
+        newNode->pRLink->pLLink = newNode;
     pNode->pRLink = newNode;
     pList->currentElementCount++;
     return (TRUE);
@@ -54,7 +55,8 @@ int removeDLElement(DoublyList* pList, int position)
         pNode = pNode->pRLink;
     delNode = pNode->pRLink;
     pNode->pRLink = delNode->pRLink;
-    delNode->pRLink->pLLink = pNode;
+	if (position < pList->currentElementCount - 1)
+    	delNode->pRLink->pLLink = pNode;
     free(delNode);
     pList->currentElementCount--;
     return (TRUE);
@@ -92,7 +94,7 @@ void displayDoublyList(DoublyList* pList)
 {
     DoublyListNode  *pNode;
 
-    pNode = &pList->headerNode;
+    pNode = pList->headerNode.pRLink;
     printf("Current List Length : %d\n", pList->currentElementCount);
     for (int i = 0; i < pList->currentElementCount; i++)
 	{
