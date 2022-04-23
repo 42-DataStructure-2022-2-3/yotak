@@ -5,31 +5,22 @@ LinkedStack* createLinkedStack()
 	LinkedStack *newLS;
 
 	newLS = (LinkedStack *)calloc(1, sizeof(LinkedStack));
-	newLS->currentElementCount = 0;
 	newLS->pTopElement = NULL;
 	return (newLS);
 }
 
-StackNode* createStackNode()
+int	pushLS(LinkedStack* pStack, StackNode element)
 {
 	StackNode *newNode;
 
 	newNode = (StackNode *)calloc(1, sizeof(StackNode));
-	return (newNode);
-}
-
-int	pushLS(LinkedStack* pStack, StackNode element)
-{
-	if (isLinkedStackFull(pStack))
-		return (FALSE);
+	*newNode = element;
 	if (pStack->pTopElement == NULL)
-		pStack->pTopElement = &element;
+		pStack->pTopElement = newNode;
 	else
 	{
-		StackNode	*top;
-		top = pStack->pTopElement;
-		pStack->pTopElement = &element;
-		element.pLink = top;
+		newNode->pLink = pStack->pTopElement;
+		pStack->pTopElement = newNode;
 	}
 	pStack->currentElementCount++;
 	return (TRUE);
@@ -37,7 +28,7 @@ int	pushLS(LinkedStack* pStack, StackNode element)
 
 StackNode* popLS(LinkedStack* pStack)
 {
-	if (!(pStack->currentElementCount))
+	if (isLinkedStackEmpty(pStack))
 		return (NULL);
 	StackNode	*popNode;
 	popNode = pStack->pTopElement;
@@ -53,20 +44,25 @@ StackNode* peekLS(LinkedStack* pStack)
 
 void deleteLinkedStack(LinkedStack* pStack)
 {
+	if (isLinkedStackEmpty(pStack))
+		return ;
+
 	StackNode	*delNode;
 
 	while (pStack->pTopElement)
 	{
 		delNode = popLS(pStack);
 		free(delNode);
+		--(pStack->currentElementCount);
 	}
-	pStack->currentElementCount = 0;
+	free(pStack);
 }
 
 int isLinkedStackFull(LinkedStack* pStack)
 {
 	return (FALSE);
 }
+
 int isLinkedStackEmpty(LinkedStack* pStack)
 {
 	return (pStack->pTopElement == NULL);

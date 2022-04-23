@@ -15,7 +15,6 @@ typedef struct LinkedStackType
 } LinkedStack;
 
 LinkedStack* createLinkedStack();
-StackNode* createStackNode();
 int pushLS(LinkedStack* pStack, StackNode element);
 StackNode* popLS(LinkedStack* pStack);
 StackNode* peekLS(LinkedStack* pStack);
