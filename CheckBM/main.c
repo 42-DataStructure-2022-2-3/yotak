@@ -4,7 +4,7 @@ int checkBracketMatching(char *expression);
 
 int main(void)
 {
-	char *str = "{[A+B)*C}";
+	char *str = "{A+B";
 	printf("%d\n", checkBracketMatching(str));
 	return (0);
 }
