@@ -4,7 +4,7 @@
 # include <stdlib.h>
 # include <string.h>
 # define OPERATOR "()*/+-0"
-typedef enum PrecedenceType { lparen, rparen, times, divide, plus, minus, operand} Precedence;
+typedef enum PrecedenceType {lparen, rparen, times, divide, plus, minus, operand} Precedence;
 typedef struct StackNodeType
 {
 	char value;

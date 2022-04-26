@@ -1,100 +1,97 @@
 #include "linkedstack.h"
 
-int main(void)
+void	crete_push(LinkedStack *pStack, char value, Precedence type)
+{
+	StackNode newNode;
+	newNode.value = value;
+	newNode.type = type;
+	pushLS(pStack, newNode);
+}
+
+int	pop_higher_priority(LinkedStack *pStack, Precedence priority)
+{
+	StackNode	*check;
+
+	check = pStack->pTopElement;
+	while (pStack->currentElementCount != 0 && check != NULL)
+	{
+		if (check->type < priority)
+			printf("%c ", OPERATOR[popLS(pStack)->type]);
+		check = check->pLink;
+	}
+	return (0);
+}
+
+int	main(void)
 {
 	LinkedStack *LS = createLinkedStack();
-	int	i = 0;
-	char *str = "(a * b)";
+	int	i = -1;
+	char *str = "a * b";
 
-	if (checkBracketMatching(str))
+	if (!checkBracketMatching(str))
 	{
-		printf("Bracket ERROR!\n");
+		printf("[ERROR] Wrong String\n");
 		return (0);
 	}
-	while(str[i])
+	while (str[++i])
 	{
-		if (str[i] == ' ')
-		{
-			i++;
-			continue;
-		}
-		else if (!strchr(OPERATOR,str[i]))
-			printf("%c ", str[i]);
+		if (str[i] == 32)
+			continue ;
+		else if (!strchr(OPERATOR, str[i]))
+			printf("%c", str[i]);
 		else
 		{
-			StackNode newNode;
-			newNode.value = str[i];
-			switch(newNode.value)
+			if (str[i] == '(')
+				crete_push(LS, str[i], 0);
+			else if (str[i] == ')')
 			{
-				case('('):
-					newNode.type = lparen;
-					break;
-				case(')'):
-				{
-					while (LS->currentElementCount != 0 && LS->pTopElement->type != 0)
-					{
-						printf("%c ", OPERATOR[popLS(LS)->type]);
-					}
-					break;
-				}
-				case('*'):
-				{
-					if (isLinkedStackEmpty(LS))
-					{
-						printf("Push to Empty List\n");
-						newNode.type = times;
-					}
-					else
-					{
-						StackNode *curr;
-						curr = LS->pTopElement;
-						while (curr->pLink != NULL && curr->type <= 3)
-						{
-							printf("%c ", OPERATOR[popLS(LS)->type]);
-							curr = curr->pLink;
-						}
-					}
-					break;
-				}
-				// case('/'):
-				// 	if (isLinkedStackEmpty(LS))
-				// 		newNode.type = divide;
-				// 	else
-				// 		while (LS->pTopElement->type <= 3)
-				// 		{
-				// 			printf("%c ", OPERATOR[popLS(LS)->type]);
-				// 		}
-				// 	break;
-				// case('+'):
-				// 	if (isLinkedStackEmpty(LS))
-				// 		newNode.type = plus;
-				// 	else
-				// 		while (LS->pTopElement->type <= 5)
-				// 		{
-				// 			printf("%c ", OPERATOR[popLS(LS)->type]);
-				// 		}
-				// 	break;
-				// case('-'):
-				// 	if (isLinkedStackEmpty(LS))
-				// 		newNode.type = minus;
-				// 	else
-				// 		while (LS->pTopElement->type <= 5)
-				// 		{
-				// 			printf("%c ", OPERATOR[popLS(LS)->type]);
-				// 		}
-				// 	break;
+				StackNode	*curr;
+				curr = LS->pTopElement;
+				while (curr->type != 0)
+					printf("%c", OPERATOR[popLS(LS)->type]);
+				if (curr->type == 0)
+					popLS(LS);
 			}
-			pushLS(LS, newNode);
-			// printf("Current Element Count : %d\n", LS->currentElementCount);
+			else if (str[i] == '*')
+			{
+				StackNode	*curr;
+				curr = LS->pTopElement;
+				if (!isLinkedStackEmpty(LS) && curr->type < 2)
+					popLS(LS);
+				else
+					crete_push(LS, str[i], 2);
+			}
+			else if (str[i] == '/')
+			{
+				StackNode	*curr;
+				curr = LS->pTopElement;
+				if (!isLinkedStackEmpty(LS) && curr->type < 2)
+					popLS(LS);
+				else
+					crete_push(LS, str[i], 3);
+			}
+			else if (str[i] == '+')
+			{
+				StackNode	*curr;
+				curr = LS->pTopElement;
+				if (!isLinkedStackEmpty(LS) && curr->type < 4)
+					popLS(LS);
+				else
+					crete_push(LS, str[i], 4);
+			}
+			else if (str[i] == '-')
+			{
+				StackNode	*curr;
+				curr = LS->pTopElement;
+				if (!isLinkedStackEmpty(LS) && curr->type < 4)
+					popLS(LS);
+				else
+					crete_push(LS, str[i], 5);
+			}
 		}
-		i++;
 	}
 	if (!isLinkedStackEmpty(LS))
-	{
-		// printf("Stack is not Empty\n");
-		while (LS->currentElementCount != 0)
-			printf("%c ", OPERATOR[popLS(LS)->type]);
-	}
-	printf("\n");
-	return (0);
+		while (LS->currentElementCount > 0)
+			printf("%c", OPERATOR[popLS(LS)->type]);
+	return (TRUE);
 }
