@@ -33,7 +33,7 @@ void	print_maze(char maze[MAX][MAX])
 
 void	push_valid_pos(LinkedStack *LS, int x, int y)
 {
-	if (x > 0 && y < 0)
+	if (x > 0 && y > 0)
 	{
 		if (maze[x][y] != 1 && maze[x][y] != 2)
 		{
