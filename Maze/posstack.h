@@ -20,7 +20,7 @@ int pushLS(LinkedStack* pStack, PosNode element);
 PosNode* popLS(LinkedStack* pStack);
 PosNode* peekLS(LinkedStack* pStack);
 void deleteLinkedStack(LinkedStack* pStack);
-int isLinkedStackFull(LinkedStack* pStack);
+int isLinkedStackFull();
 int isLinkedStackEmpty(LinkedStack* pStack);
 
 #endif

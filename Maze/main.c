@@ -33,9 +33,7 @@ void	print_maze(char maze[MAX][MAX])
 
 void	push_valid_pos(LinkedStack *LS, int x, int y)
 {
-	if (x < 0 || y < 0)
-		return ;
-	else
+	if (x > 0 && y < 0)
 	{
 		if (maze[x][y] != 1 && maze[x][y] != 2)
 		{
@@ -55,9 +53,10 @@ int	main(void)
 	validPosStack = createLinkedStack();
 	x = 0;
 	y = 1;
+	print_maze(maze);
 	while (maze[x][y] != 'e')
 	{
-		maze[x][y] == '2';
+		maze[x][y] = '2';
 		//일단 다 받고 함수에서 거르기
 		push_valid_pos(validPosStack, x + 1, y);
 		push_valid_pos(validPosStack, x - 1, y);
@@ -66,7 +65,7 @@ int	main(void)
 		if (isLinkedStackEmpty(validPosStack))
 		{
 			printf("No Way!\n");
-			return ;
+			return (0);
 		}
 		else
 		{

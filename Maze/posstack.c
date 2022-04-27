@@ -58,7 +58,7 @@ void deleteLinkedStack(LinkedStack* pStack)
 	free(pStack);
 }
 
-int isLinkedStackFull(LinkedStack* pStack)
+int isLinkedStackFull()
 {
 	return (FALSE);
 }
