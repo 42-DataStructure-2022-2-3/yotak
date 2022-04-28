@@ -53,19 +53,17 @@ int	findPath(int maze[HEIGHT][WIDTH], MapPosition start, MapPosition end, Linked
 void showPath(LinkedStack *pStack)
 {
 	LinkedStack *cpR = createLinkedStack();
+	MapPosition *curr;
 
-	printf("LS : %d\n", pStack->currentElementCount);
 	while (pStack->currentElementCount != 0)
 		pushLS(cpR, *popLS(pStack));
-	printf("cpR : %d\n", cpR->currentElementCount);
-	
-	MapPosition *curr;
-	curr = cpR->pTopElement->pLink;
-	for (int i = 0; i < cpR->currentElementCount - 1; i++)
+	curr = cpR->pTopElement;
+	for (int i = 0; i < cpR->currentElementCount; i++)
 	{
 		printf("(%d, %d) -> ", curr->x, curr->y);
 		curr = curr->pLink;
 	}
+	printf("exit\n");
 	free(cpR);
 }
 
