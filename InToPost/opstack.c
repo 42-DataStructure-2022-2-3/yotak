@@ -1,9 +1,9 @@
-#include "checkBM.h"
+#include "opstack.h"
 
 int checkBracketMatching(char *expression)
 {
 	LinkedStack *LS;
-	StackNode element;
+	OpNode element;
 	char symbol;
 	int i = 0;
 
@@ -17,7 +17,7 @@ int checkBracketMatching(char *expression)
 			case '[':
 			case '{':
 			{
-				element.data = expression[i];
+				element.value = expression[i];
 				pushLS(LS, element);
 				break;
 			}
@@ -29,15 +29,15 @@ int checkBracketMatching(char *expression)
 					return (FALSE);
 				else{
 					if (symbol == ')')
-						if (peekLS(LS)->data != '(')
+						if (peekLS(LS)->value != '(')
 							return (FALSE);
 					if (symbol == '}')
 					{
-						if (peekLS(LS)->data != '{')
+						if (peekLS(LS)->value != '{')
 							return (FALSE);
 					}
 					if (symbol == ']')
-						if (peekLS(LS)->data != '[')
+						if (peekLS(LS)->value != '[')
 							return (FALSE);
 					popLS(LS);
 				}
@@ -51,20 +51,20 @@ int checkBracketMatching(char *expression)
 	return (TRUE);
 }
 
-LinkedStack* createLinkedStack()
+OpNode* createLinkedStack()
 {
-	LinkedStack *newLS;
+	OpStack *newLS;
 
-	newLS = (LinkedStack *)calloc(1, sizeof(LinkedStack));
+	newLS = (OpNode *)calloc(1, sizeof(OpNode));
 	newLS->pTopElement = NULL;
 	return (newLS);
 }
 
-int	pushLS(LinkedStack* pStack, StackNode element)
+int	pushLS(OpStack* pStack, OpNode element)
 {
-	StackNode *newNode;
+	OpNode *newNode;
 
-	newNode = (StackNode *)calloc(1, sizeof(StackNode));
+	newNode = (OpNode *)calloc(1, sizeof(OpNode));
 	*newNode = element;
 	if (pStack->pTopElement == NULL)
 		pStack->pTopElement = newNode;
@@ -77,30 +77,28 @@ int	pushLS(LinkedStack* pStack, StackNode element)
 	return (TRUE);
 }
 
-StackNode* popLS(LinkedStack* pStack)
+OpNode* popLS(OpStack* pStack)
 {
 	if (isLinkedStackEmpty(pStack))
 		return (NULL);
-	StackNode	*popNode;
+	OpNode	*popNode;
 	popNode = pStack->pTopElement;
 	pStack->pTopElement = popNode->pLink;
 	--(pStack->currentElementCount);
-	if (pStack->currentElementCount == 0)
-		pStack->pTopElement = NULL;
 	return (popNode);
 }
 
-StackNode* peekLS(LinkedStack* pStack)
+OpNode* peekLS(OpStack* pStack)
 {
 	return (pStack->pTopElement);
 }
 
-void deleteLinkedStack(LinkedStack* pStack)
+void deleteLinkedStack(OpStack* pStack)
 {
 	if (isLinkedStackEmpty(pStack))
 		return ;
 
-	StackNode	*delNode;
+	OpNode	*delNode;
 
 	while (pStack->pTopElement)
 	{
@@ -111,12 +109,12 @@ void deleteLinkedStack(LinkedStack* pStack)
 	free(pStack);
 }
 
-int isLinkedStackFull(LinkedStack* pStack)
+int isLinkedStackFull(OpStack* pStack)
 {
 	return (FALSE);
 }
 
-int isLinkedStackEmpty(LinkedStack* pStack)
+int isLinkedStackEmpty(OpStack* pStack)
 {
 	return (pStack->pTopElement == NULL);
 }

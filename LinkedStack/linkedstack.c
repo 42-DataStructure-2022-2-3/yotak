@@ -3,9 +3,13 @@
 LinkedStack* createLinkedStack()
 {
 	LinkedStack *newLS;
+	StackNode   *newNode; //더미노드
 
 	newLS = (LinkedStack *)calloc(1, sizeof(LinkedStack));
-	newLS->pTopElement = NULL;
+	newNode = (StackNode *)calloc(1, sizeof(StackNode));
+	newLS->pTopElement = newNode;
+	newNode->data = 0;
+	newNode->pLink = NULL;
 	return (newLS);
 }
 
@@ -26,7 +30,7 @@ int	pushLS(LinkedStack* pStack, StackNode element)
 	return (TRUE);
 }
 
-StackNode* popLS(LinkedStack* pStack) // free해야하는데 return value가 StackNode*....
+StackNode* popLS(LinkedStack* pStack)
 {
 	if (isLinkedStackEmpty(pStack))
 		return (NULL);

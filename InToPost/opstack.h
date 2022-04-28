@@ -10,22 +10,22 @@ typedef struct StackNodeType
 	char value;
 	Precedence type;
 	struct StackNodeType* pLink;
-} StackNode;
+} OpNode;
 
 typedef struct LinkedStackType
 {
 	int currentElementCount;
-	StackNode* pTopElement;
-} LinkedStack;
+	OpNode* pTopElement;
+} OpStack;
 
-LinkedStack* createLinkedStack();
-int pushLS(LinkedStack* pStack, StackNode element);
-StackNode* popLS(LinkedStack* pStack);
-StackNode* peekLS(LinkedStack* pStack);
+OpNode* createLinkedStack();
+int pushLS(OpStack* pStack, OpNode element);
+OpNode* popLS(OpStack* pStack);
+OpNode* peekLS(OpStack* pStack);
 int checkBracketMatching(char *expression);
-void deleteLinkedStack(LinkedStack* pStack);
-int isLinkedStackFull(LinkedStack* pStack);
-int isLinkedStackEmpty(LinkedStack* pStack);
+void deleteLinkedStack(OpStack* pStack);
+int isLinkedStackFull(OpStack* pStack);
+int isLinkedStackEmpty(OpStack* pStack);
 
 #endif
 

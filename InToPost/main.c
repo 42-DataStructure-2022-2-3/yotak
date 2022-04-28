@@ -1,4 +1,4 @@
-#include "linkedstack.h"
+#include "opstack.h"
 
 void	crete_push(LinkedStack *pStack, char value, Precedence type)
 {
@@ -26,7 +26,7 @@ int	main(void)
 {
 	LinkedStack *LS = createLinkedStack();
 	int	i = -1;
-	char *str = "a * b";
+	char *str = "a * b + c";
 
 	if (!checkBracketMatching(str))
 	{
