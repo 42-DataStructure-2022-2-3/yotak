@@ -65,5 +65,5 @@ int isLinkedStackFull(LinkedStack* pStack)
 
 int isLinkedStackEmpty(LinkedStack* pStack)
 {
-	return (pStack->pTopElement == NULL);
+	return (pStack->currentElementCount == 0);
 }
