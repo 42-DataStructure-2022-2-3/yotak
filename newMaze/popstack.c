@@ -44,15 +44,10 @@ MapPosition* peekLS(LinkedStack* pStack)
 
 void deleteLinkedStack(LinkedStack* pStack)
 {
-	if (isLinkedStackEmpty(pStack))
-		return ;
-
-	MapPosition	*delNode;
-
-	while (pStack->pTopElement)
+	while (pStack->currentElementCount > 0)
 	{
-		delNode = popLS(pStack);
-		free(delNode);
+		printf("3 : %d\n", pStack->currentElementCount);
+		free(popLS(pStack));
 		--(pStack->currentElementCount);
 	}
 	free(pStack);

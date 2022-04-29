@@ -62,13 +62,11 @@ void showPath(LinkedStack *pStack)
 	{
 		printf("(%d, %d) -> ", cpR->pTopElement->x, cpR->pTopElement->y);
 		free(popLS(cpR));
-		// printf("(%d, %d) -> ", curr->x, curr->y);
-		// curr = curr->pLink;
 	}
 	printf("exit\n");
 	deleteLinkedStack(cpR);
 }
-
+/*
 int	main(void)
 {
 	LinkedStack *LS;
@@ -79,7 +77,6 @@ int	main(void)
 	start.x = 1;
 	start.y = 0;
 	pushLS(LS, start);
-
 	end.x = 3;
 	end.y = 3;
 	findPath(maze, start, end, LS);
@@ -87,4 +84,18 @@ int	main(void)
 	showPath(LS);
 	deleteLinkedStack(LS);
 	return 0;
+}*/
+
+int main()
+{
+	LinkedStack *LS = createLinkedStack();
+
+	MapPosition start;
+	start.x = 1;
+	start.y = 0;
+	printf("1 : %d\n", LS->currentElementCount);
+	pushLS(LS, start);
+	printf("2 : %d\n", LS->currentElementCount);
+	deleteLinkedStack(LS);
+	system("leaks a.out");
 }
