@@ -19,6 +19,7 @@ typedef struct SimData {
 	float servTime;
 	float nightTime;
 	bool isOpen;
+	SimCustomerNode *window;
 	SimCustomerQueue *waitlist;
 	SimCustomerQueue *servicelist;
 }	Data;

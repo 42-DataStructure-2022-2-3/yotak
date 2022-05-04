@@ -15,14 +15,15 @@ void closeBank() {
 }
 
 void checkworkTime() {
-	if (data.servTime == 11 && data.isOpen == true) closeBank();
-	if (data.nightTime == 13 && data.isOpen == false) openBank();
+	// if (data.servTime == 11 && data.isOpen == true) closeBank();
+	// if (data.nightTime == 13 && data.isOpen == false) openBank();
 	if (data.isOpen == true && data.servTime - (int)data.servTime == 0)
-		printf("지금은 낮 %d 시 입니다.\n", (int)data.servTime + 7);
-	else if (data.isOpen == false && data.nightTime - (int)data.nightTime == 0)
-		printf("지금은 밤 %d 시 입니다.\n", ((int)data.nightTime + 18) % 24);
-	if (data.isOpen == true) data.servTime += 0.5 ;
-	else data.nightTime += 0.5;
+		printf("지금은 %d 시 입니다.\n", (int)data.servTime + 7);
+	// else if (data.isOpen == false && data.nightTime - (int)data.nightTime == 0)
+	// 	printf("지금은 밤 %d 시 입니다.\n", ((int)data.nightTime + 18) % 24);
+	// if (data.isOpen == true) 
+	data.servTime += 0.5 ;
+	// else data.nightTime += 0.5;
 }
 
 void exitSimul(int sigint) {
@@ -47,14 +48,27 @@ void run_simulation() {
 			printf("%d번 고객이 은행에 입장하셨습니다. %d\n", nptr->customer.nbr, needtime);
 			enqueueSCQ(data.waitlist, *nptr);
 			free(nptr);
+			if (data.servTime == data.window->customer.endTime)
+			{
+				free(data.window);
+				data.window = NULL;
+			}
+			//헤더에 왔을 때 업무를 보도록
+			if (data.window == NULL && isSimCustomerQueueEmpty(data.servicelist) == false)
+			{
+				//업무 시작
+				data.window = dequeueSCQ(data.servicelist);
+				data.window->customer.startTime = data.servTime;
+				data.window->customer.endTime = data.window->customer.startTime + data.servTime;
+			}
 			if (isSimCustomerQueueFull(data.servicelist) == false
 				&& isSimCustomerQueueEmpty(data.waitlist) == false) {
 				nptr = dequeueSCQ(data.waitlist);
 				enqueueSCQ(data.servicelist, *nptr);
 				printf("%d번 고객이 은행 창구에서 업무를 보고 있습니다. %d\n", nptr->customer.nbr, needtime);
+
 				free(nptr);
 			}
-			if ()
 		}
 		checkworkTime();
 		usleep(500000);
