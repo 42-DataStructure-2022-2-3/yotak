@@ -16,10 +16,10 @@
 // 종료 시각: 시작 시각 + 서비스 시간.
 
 typedef struct SimData {
-	float servTime;
-	float nightTime;
+	int servTime;
+	int nightTime;
 	bool isOpen;
-	SimCustomerNode *window;
+	SimCustomerQueue *windowlist;
 	SimCustomerQueue *waitlist;
 	SimCustomerQueue *servicelist;
 }	Data;
