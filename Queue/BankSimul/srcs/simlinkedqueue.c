@@ -6,6 +6,7 @@ SimCustomerQueue* createSimCustomerQueue(int maxElementCount)
 	if (!queue)
 		return (NULL);
 	queue->maxElementCount = maxElementCount;
+	queue->currentElementCount = 0;
 	return (queue);
 }
 
