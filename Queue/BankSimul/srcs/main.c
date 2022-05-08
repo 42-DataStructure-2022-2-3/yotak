@@ -39,20 +39,19 @@ void run_simulation() {
 	static int customerNbr;
 
 	while (1) {
-		//printf("windowlist의 노드 개수%d, servicelist의 노드 개수 %d\n", data.windowlist->currentElementCount, data.servicelist->currentElementCount);
 		signal(SIGINT, exitSimul);
 		printf("지금은 %d 시 입니다.\n", data.servTime + 7);
 		int needtime = rand() % 3;
 		needtime = (!needtime) ? 1 : needtime;
 		nptr = createSCQNode(data.servTime, needtime, customerNbr++);
-		printf("%d번 고객이 은행에 입장하셨습니다. 서비스 예상 시간: %d\n", nptr->customer.nbr, needtime);
+		printf("%d번 고객이 은행에 [입장]하셨습니다(필요시간: %d)\n", nptr->customer.nbr, needtime);
 		enqueueSCQ(data.waitlist, *nptr);
 		free(nptr);
 		if (isSimCustomerQueueFull(data.servicelist) == false
 			&& isSimCustomerQueueEmpty(data.waitlist) == false) {
 			nptr = dequeueSCQ(data.waitlist);
 			enqueueSCQ(data.servicelist, *nptr);
-			printf("%d번 고객이 은행 창구에서 업무를 기다리고 있습니다. 서비스 예상 시간: %d\n", nptr->customer.nbr, needtime);
+			printf("%d번 고객이 [은행 창구]에서 업무를 [기다리고] 있습니다(필요시간: %d)\n", nptr->customer.nbr, needtime);
 			free(nptr);
 		}
 		if (isSimCustomerQueueFull(data.windowlist) == false
@@ -62,13 +61,13 @@ void run_simulation() {
 			enqueueSCQ(data.windowlist, *nptr);
 			data.windowlist->front->customer.startTime = data.servTime;
 			data.windowlist->front->customer.endTime = data.servTime + needtime;
-			printf("%d번 고객이 은행 창구에서 업무를 보고 있습니다. 서비스 예상 시간: %d\n", data.windowlist->front->customer.nbr, needtime);
+			printf("%d번 고객이 [은행 창구]에서 업무를 [보고] 있습니다(필요시간: %d)\n", data.windowlist->front->customer.nbr, needtime);
 			free(nptr);
 		}
 		if (data.windowlist->front->customer.endTime == data.servTime)
 		{
 			nptr = dequeueSCQ(data.windowlist);
-			printf("%d번 고객이 은행을 나갑니다 %d\n", nptr->customer.nbr, needtime);
+			printf("%d번 고객이 은행을 [나갑니다](종료시간: %d)\n", nptr->customer.nbr, nptr->customer.endTime);
 			free(nptr);
 		}
 		data.servTime += 1 ;
