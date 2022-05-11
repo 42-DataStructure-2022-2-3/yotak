@@ -6,7 +6,7 @@
 typedef struct BinTreeNodeType
 {
 	char data;
-	int visited; // 0 : not visited, 1 : visited
+	int visited; /* 0 : not visited, 1 : visited */
 	struct BinTreeNodeType* pLeftChild;
 	struct BinTreeNodeType* pRightChild;
 } BinTreeNode;
@@ -16,6 +16,7 @@ typedef struct BinTreeType
 	struct BinTreeNodeType* pRootNode;
 } BinTree;
 BinTree* makeBinTree(BinTreeNode rootNode);
+BinTreeNode* makeBinTreeNode(char data, int visited);
 BinTreeNode* getRootNodeBT(BinTree* pBinTree);
 BinTreeNode* insertLeftChildNodeBT(BinTreeNode* pParentNode, BinTreeNode element);
 BinTreeNode* insertRightChildNodeBT(BinTreeNode* pParentNode, BinTreeNode element);
