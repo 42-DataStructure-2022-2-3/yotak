@@ -1,4 +1,4 @@
-#include "BinTree.h"
+#include "../include/bintree.h"
 
 BinTree* makeBinTree(BinTreeNode rootNode)
 {
