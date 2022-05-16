@@ -1,5 +1,6 @@
 {
+	"makefile.extensionOutputFolder": "./.vscode",
 	"files.associations": {
-		"posstack.h": "c"
+		"ios": "c"
 	}
 }

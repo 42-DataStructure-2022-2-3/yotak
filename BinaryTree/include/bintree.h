@@ -26,6 +26,7 @@ void deleteBinTree(BinTree* pBinTree);
 void deleteBinTreeNode(BinTreeNode* pNode);
 #endif
 
+
 #ifndef _COMMON_TREE_DEF_
 #define _COMMON_TREE_DEF_
 #define TRUE		1
