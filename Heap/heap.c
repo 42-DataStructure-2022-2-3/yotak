@@ -1,9 +1,14 @@
 #include "heap.h"
 
-Heap *makeHeap()
+Heap *makeHeap(int maxElementCount)
 {
-	Heap *newHeap = (Heap *)calloc(1, sizeof(Heap));
-	newHeap->currentElementCount = 1;
+	Heap *newHeap;
+	HeapNode *pElement;
+
+	newHeap = (Heap *)calloc(1, sizeof(Heap));
+	pElement = (HeapNode *)calloc(maxElementCount, sizeof(HeapNode));
+	newHeap->maxElementCount = maxElementCount;
+	newHeap->pElement = pElement;
 	return (newHeap);
 }
 HeapNode *getRootNode(Heap *pHeap)
@@ -20,9 +25,7 @@ HeapNode *insertMaxHeap(Heap *pHeap, HeapNode element)
 	//부모 노드와 키 값 비교 및 이동
 	while ((i != 1) && newNode->data > pHeap->pElement[i / 2].data)
 	{
-		HeapNode tmp = pHeap->pElement[i];
 		pHeap->pElement[i] = pHeap->pElement[i / 2];
-		pHeap->pElement[i / 2] = tmp;
 		i /= 2;
 	}
 	return (newNode);

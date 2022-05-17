@@ -11,10 +11,11 @@ typedef struct HeapNodeType
 } HeapNode;
 typedef struct HeapType
 {
-	HeapNode pElement[MAX_SIZE];
+	int maxElementCount;
 	int currentElementCount;
+	HeapNode *pElement;
 } Heap;
-Heap *makeHeap();
+Heap *makeHeap(int maxElementCount);
 HeapNode *getRootNode(Heap *pHeap);
 HeapNode *insertMaxHeap(Heap *pHeap, HeapNode element);
 void deleteMaxHeap(Heap *pHeap);
