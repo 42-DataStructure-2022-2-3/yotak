@@ -2,7 +2,7 @@
 
 int checkBracketMatching(char *expression)
 {
-	LinkedStack *LS;
+	OpStack *LS;
 	OpNode element;
 	char symbol;
 	int i = 0;

@@ -6,7 +6,7 @@
 #define MAX_SIZE 42
 typedef struct HeapNodeType
 {
-	int	data;
+	int	key;
 	int visited;
 } HeapNode;
 typedef struct HeapType
@@ -18,7 +18,7 @@ typedef struct HeapType
 Heap *makeHeap(int maxElementCount);
 HeapNode *getRootNode(Heap *pHeap);
 HeapNode *insertMaxHeap(Heap *pHeap, HeapNode element);
-void deleteMaxHeap(Heap *pHeap);
+HeapNode *deleteMaxHeap(Heap *pHeap);
 #endif
 
 #ifndef _COMMON_STACK_DEF_
