@@ -3,6 +3,7 @@
 
 #### 트리 용어
  <img width="344" alt="Untitled" src="https://user-images.githubusercontent.com/101935265/169186058-f61b231e-253e-47d3-960d-fcac75bcf4a1.png">
+
 1. 노드 : 트리의 기본 요소
 	*위 트리의 A, B, C 등을 의미
 ```C
