@@ -2,6 +2,8 @@
 > 계층적인 자료를 표현하기 위한 비선형 자료구조
 
 #### 트리 용어
+ <img width="344" alt="Untitled" src="https://user-images.githubusercontent.com/101935265/169186058-f61b231e-253e-47d3-960d-fcac75bcf4a1.png">
+
 1. 노드 : 트리의 기본 요소
 	*위 트리의 A, B, C 등을 의미
 ```C
@@ -35,6 +37,7 @@ typedef struct TreeNodeType
 7. 포리스트(forest) : 트리들의 집합
 
 ## 이진트리(Binary Tree)
+
 > 모든 노드가 2개의 서브 트리를 갖는 트리(서브트리는 공집합일 수 있다 => 공집합도 이진트리)
 * 모든 노드의 차수가 '2'이하인 트리
 * 모든 노드가 2개 이하의 자식노드를 갖는 트리
@@ -46,6 +49,11 @@ typedef struct TreeNodeType
 #### 이진트리의 분류
 1. 포화 이진트리(full binary tree)
 * 트리의 각 레벨에 노드가 꽉 차있는 이진트리
+ <img width="365" alt="Untitled 2 copy" src="https://user-images.githubusercontent.com/101935265/169186250-1a2d0aad-4003-4f24-ac0f-15eea42d3d8a.png">
+
 2. 완전 이진트리(complete binary tree)
 * 높이가 h일때, h-1까지는 포화 이진트리이고 마지막 레벨 h에서는 왼쪽부터 오른쪽으로 노드가 순서대로 채워진 트리
+ <img width="452" alt="Untitled 2 copy 2" src="https://user-images.githubusercontent.com/101935265/169186211-2974c3bc-a96a-4637-b582-49c841197e4d.png">
+
 3. 기타 이진트리
+ <img width="409" alt="Untitled 2" src="https://user-images.githubusercontent.com/101935265/169186149-74ccdea6-e433-4029-b6f6-830aae0ba55b.png">
