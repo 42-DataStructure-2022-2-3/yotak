@@ -39,6 +39,7 @@ HeapNode *deleteMaxHeap(Heap *pHeap)
 	parent = 1;
 	child = 2;
 	delNode = &pHeap->pElement[parent];
+	pHeapNode = &pHeap->pElement[(pHeap->currentElementCount)--];
 	while (child <= pHeap->currentElementCount)
 	{
 		if ((child < pHeap->currentElementCount)
