@@ -42,6 +42,8 @@ typedef struct TreeNodeType
 * 모든 노드의 차수가 '2'이하인 트리
 * 모든 노드가 2개 이하의 자식노드를 갖는 트리
 * 서브 트리간의 순서가 존재하고 왼쪽 서브 트리와 오른쪽 서브 트리가 구분된다
+* 각각의 서브 트리 또한 이진 트리이다
+
 > 순환적인 정의를 갖는다
 1. 공집합 또는
 2. 루트, 왼쪽 서브 트리, 오른쪽 서브 트리로 구성된 노드들의 유한집합
@@ -57,3 +59,43 @@ typedef struct TreeNodeType
 
 3. 기타 이진트리
  <img width="409" alt="Untitled 2" src="https://user-images.githubusercontent.com/101935265/169186149-74ccdea6-e433-4029-b6f6-830aae0ba55b.png">
+
+#### 이진 트리의 순회
+<img width="274" alt="Untitled 3" src="https://user-images.githubusercontent.com/101935265/169928146-17f11ee2-1dfb-4c12-a6a0-262adc0e473a.png">
+
+1. 전위 순회(Preorder Traversal)
+
+   V->L->R
+
+2. 중위 순회(Inorder Traversal)
+
+   L->V->R
+
+3. 후위 순회(Postorder Traversal)
+
+   L->R->V
+   
+> 위 3가지 순회를 재귀 방식으로 구현하면 종료 조건은 노드가 NULL일 때이다
+
+4. 레벨 순회(Level Traversal)
+* 레벨을 증가시키며(아래로 내려가며) 탐색
+* 동일한 레벨 상에서 좌->우로 순회하는 방식
+* 자료구조 중 큐를 사용하는 순회이다
+
+## 이진탐색트리
+<img width="511" alt="Untitled 4" src="https://user-images.githubusercontent.com/101935265/169929271-19faa2ea-b1ad-4b74-aca4-c9c1f9bfb832.png">
+
+> 이진 트리 기반의 탐색을 위한 자료구조
+1. 이진 탐색 트리의 정의
+- 모든 원소의 키는 유일한 키를 가진다
+- 왼쪽 서브 트리 키들은 루트 키보다 작다
+- 오른족 서브 트리 키들은 루트 키보다 크다
+- 왼쪽과 오른쪽 서브 트리도 이진 탐색 트리이다
+
+** 키(key)란 탐색에서 항목들을 구분하기 위해 레코드마다 가지는 고유한 값을 의미
+
+2. 이진 '탐색' 트리
+- 특정한 키값을 가진 노드를 찾기 위해 루트 노드를 기준으로 탐색한다
+- 루트 노드.key == 탐색노드.key // 탐색 성공
+- 루트 노드.key <= 탐색노드.key // 루트 노드의 오른쪽 자식 노드를 기준으로 다시 비교
+- 루트 노드.key >= 탐색노드.key // 루트 노드의 왼쪽 자식 노드를 기준으로 다시 비교
