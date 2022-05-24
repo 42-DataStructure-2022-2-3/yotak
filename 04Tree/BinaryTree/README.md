@@ -1,5 +1,12 @@
 ## 트리 (Tree)
 > 계층적인 자료를 표현하기 위한 비선형 자료구조
+```C
+//예시
+typedef struct BinTreeType
+{
+	struct BinTreeNodeType* pRootNode;
+} BinTree;
+```
 
 #### 트리 용어
  <img width="344" alt="Untitled" src="https://user-images.githubusercontent.com/101935265/169186058-f61b231e-253e-47d3-960d-fcac75bcf4a1.png">
