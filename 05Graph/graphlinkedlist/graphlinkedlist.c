@@ -101,7 +101,7 @@ void displayLinkedList(LinkedList* pList)
     node = pList->headerNode.pLink;
     while (i < pList->currentElementCount)
     {
-        printf("%d ", node->data);
+        printf("%d ", node->data.vertexID);
         node = node->pLink;
         i++;
     }
@@ -197,6 +197,7 @@ int removeEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
         element = element->pLink;
     }
     removeLLElement(pGraph->ppAdjEdge[fromVertexID], delPos);
+	return (TRUE);
 }
 
 int removeVertexLG(LinkedGraph* pGraph, int vertexID)
@@ -215,11 +216,15 @@ int removeVertexLG(LinkedGraph* pGraph, int vertexID)
 void deleteLinkedGraph(LinkedGraph* pGraph)
 {
 	for (int i = 0; i < pGraph->maxVertexCount; i++)
-		deleteLinkedGraph(pGraph->ppAdjEdge[i]);
+		deleteLinkedList(pGraph->ppAdjEdge[i]);
 }
 
 void displayLinkedGraph(LinkedGraph* pGraph)
 {
 	for(int i = 0; i < pGraph->maxVertexCount; i++)
-		displayLinkedGraph(pGraph->ppAdjEdge[i]);
+	{
+		printf("%d -> ", i);
+		displayLinkedList(pGraph->ppAdjEdge[i]);
+		printf("\n");
+	}
 }

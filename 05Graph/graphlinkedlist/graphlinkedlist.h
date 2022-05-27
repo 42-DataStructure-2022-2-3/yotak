@@ -38,33 +38,17 @@ ListNode* getLLElement(LinkedList* pList, int position);
 void clearLinkedList(LinkedList* pList);
 int getLinkedListLength(LinkedList* pList);
 void deleteLinkedList(LinkedList* pList);
-
-// �׷��� ����
+/* Linked Graph */
 LinkedGraph* createLinkedGraph(int maxVertexCount);
 LinkedGraph* createLinkedDirectedGraph(int maxVertexCount);
-
-// �׷��� ����
-void deleteLinkedGraph(LinkedGraph* pGraph);
-
-// ���� �׷��� ���� �Ǵ�
-int isEmptyAG(LinkedGraph* pGraph);
-
-// ��� �߰�
-int addVertexAG(LinkedGraph* pGraph, int vertexID);
-
-// ���� �߰�
-int addEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
-int addEdgeWithWeightAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, int weight);
-
-// ����� ��ȿ�� ����.
+int isEmptyLG(LinkedGraph* pGraph);
+int addVertexLG(LinkedGraph* pGraph, int vertexID);
+int addEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
+int addEdgeWithWeightLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, int weight);
 int checkVertexValid(LinkedGraph* pGraph, int vertexID);
-
-// ��� ����
-int removeVertexAG(LinkedGraph* pGraph, int vertexID);
-
-// ���� ����
-int removeEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
-
+int removeEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID);
+int removeVertexLG(LinkedGraph* pGraph, int vertexID);
+void deleteLinkedGraph(LinkedGraph* pGraph);
 void displayLinkedGraph(LinkedGraph* pGraph);
 #endif
 
