@@ -101,11 +101,15 @@ void displayLinkedList(LinkedList* pList)
     node = pList->headerNode.pLink;
     while (i < pList->currentElementCount)
     {
-        printf("%d\n", node->data);
+        printf("%d ", node->data);
         node = node->pLink;
         i++;
     }
 }
+
+/**
+ *	LinkedGraph
+ */
 
 LinkedGraph* createLinkedGraph(int maxVertexCount)
 {
@@ -125,20 +129,18 @@ LinkedGraph* createLinkedGraph(int maxVertexCount)
 
 LinkedGraph* createLinkedDirectedGraph(int maxVertexCount)
 {
-	LinkedGraph *ldg;
-
-	ldg = createLinkedGraph(maxVertexCount);
-	ldg->graphType = GRAPH_DIRECTED;
-	return (ldg);
+	LinkedGraph *lg;
+	lg = createLinkedGraph(maxVertexCount);
+	lg->graphType = GRAPH_DIRECTED;
+	return (lg);
 }
 
-int isEmptyAG(LinkedGraph* pGraph)
+int isEmptyLG(LinkedGraph* pGraph)
 {
     return (pGraph->currentElementCount == 0 ? TRUE : FALSE);
 }
 
-// ��� �߰�
-int addVertexAG(LinkedGraph* pGraph, int vertexID)
+int addVertexLG(LinkedGraph* pGraph, int vertexID)
 {
     if (!pGraph || vertexID < 0 || pGraph->maxVertexCount < vertexID)
         return (FALSE);
@@ -147,8 +149,7 @@ int addVertexAG(LinkedGraph* pGraph, int vertexID)
     return (TRUE);
 }
 
-// ���� �߰�
-int addEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
+int addEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
 {
     ListNode node;
     if (!checkVertexValid(pGraph, fromVertexID) || !checkVertexValid(pGraph, toVertexID))
@@ -164,7 +165,7 @@ int addEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
     return (TRUE);
 }
 
-int addEdgeWithWeightAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, int weight)
+int addEdgeWithWeightLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, int weight)
 {
     ListNode node;
     if (!checkVertexValid(pGraph, fromVertexID) || !checkVertexValid(pGraph, toVertexID))
@@ -182,7 +183,7 @@ int checkVertexValid(LinkedGraph* pGraph, int vertexID)
     return (pGraph->pVertex[vertexID]);
 }
 
-int removeEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
+int removeEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
 {
     if (!checkVertexValid(pGraph, fromVertexID) || !checkVertexValid(pGraph, toVertexID))
         return (FALSE);
@@ -196,37 +197,29 @@ int removeEdgeAG(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
         element = element->pLink;
     }
     removeLLElement(pGraph->ppAdjEdge[fromVertexID], delPos);
-	if (pGraph->graphType == GRAPH_UNDIRECTED)
-	{
-
-	}
 }
 
-int removeVertexAG(LinkedGraph* pGraph, int vertexID)
+int removeVertexLG(LinkedGraph* pGraph, int vertexID)
 {
-
+	if (!pGraph || !checkVertexValid(pGraph, vertexID))
+		return (FALSE);
+	for (int i = 0; i< pGraph->maxVertexCount; i++)
+	{
+		removeEdgeLG(pGraph, vertexID, i);
+		removeEdgeLG(pGraph, i, vertexID);
+	}
+	pGraph->pVertex[vertexID] = NOT_USED;
+	return (TRUE);
 }
 
 void deleteLinkedGraph(LinkedGraph* pGraph)
 {
-
+	for (int i = 0; i < pGraph->maxVertexCount; i++)
+		deleteLinkedGraph(pGraph->ppAdjEdge[i]);
 }
 
 void displayLinkedGraph(LinkedGraph* pGraph)
 {
-	ListNode	*tmp;
-	int			i;
-
-	i = 0;
-	while (i < pGraph->maxVertexCount)
-	{
-		tmp = &pGraph->ppAdjEdge[i]->headerNode;
-		while (tmp)
-		{
-			printf("%d ", tmp->data);
-			tmp = tmp->pLink;
-		}
-		printf("\n");
-		i += 1;
-	}
+	for(int i = 0; i < pGraph->maxVertexCount; i++)
+		displayLinkedGraph(pGraph->ppAdjEdge[i]);
 }
