@@ -29,7 +29,7 @@ Heap *orderEdges(LinkedGraph *pGraph)
 	return pHeap;
 }
 
-int	checkCycle(LinkedGraph *pGraph, int fromVertexId, int toVertexId)
+int	checkCycle_kru(LinkedGraph *pGraph, int fromVertexId, int toVertexId)
 {
 	LinkedStack *stack;
 	StackNode element;
@@ -99,7 +99,7 @@ LinkedGraph *kruskal(LinkedGraph *pGraph)
 		HeapNode *pHeapNode;
 		pHeapNode = deleteMinHeapNode(pHeap);
 		//순환 발생 점검
-		isCycle = checkCycle(pReturn, pHeapNode->fromVertexId, pHeapNode->toVertexId);
+		isCycle = checkCycle_kru(pReturn, pHeapNode->fromVertexId, pHeapNode->toVertexId);
 		if (!isCycle)
 		{
 			//노드에 추가가 안되어있으면 추가
