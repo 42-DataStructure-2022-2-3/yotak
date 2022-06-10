@@ -8,9 +8,9 @@ int main()
 	insertMinHeap(heap, buf);
 	buf.key = 4;
 	insertMinHeap(heap, buf);
-	buf.key = 2;
+	buf.key = 3;
 	insertMinHeap(heap, buf);
-	buf.key = 5;
+	buf.key = 0;
 	insertMinHeap(heap, buf);
 	buf.key = 7;
 	insertMinHeap(heap, buf);
@@ -19,4 +19,5 @@ int main()
 		printf("%d\t", popMinHeapNode(heap).key);
 	}
 	printf("\n");
+	system("leaks heapsort");
 }

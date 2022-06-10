@@ -3,8 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-//MaxHeap
-#define MAX_SIZE 42
+
 typedef struct HeapNodeType
 {
 	int	key;

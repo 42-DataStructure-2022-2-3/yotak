@@ -1,5 +1,6 @@
 #include "minheap.h"
 
+// 힙 구조 생성
 Heap *makeHeap(int maxElementCount)
 {
 	Heap *pHeap;
@@ -9,7 +10,7 @@ Heap *makeHeap(int maxElementCount)
 
 	return (pHeap);
 }
-
+// 0번 노드 반환
 HeapNode *getRootNode(Heap *pHeap)
 {
 	if (pHeap && pHeap->currentElementCount > 0)
@@ -17,12 +18,13 @@ HeapNode *getRootNode(Heap *pHeap)
 	else
 		return (NULL);
 }
-//TRUE, FALSE
+// 최소 힙에 요소 삽입
+// 맨 끝자리에 배치한 후 부모노드와 크기를 비교하여 자리를 찾아감
 int	insertMinHeap(Heap *pHeap, HeapNode element)
 {
+	// 현재 노드 개수 == 최대 노드 개수
 	if (pHeap->currentElementCount == pHeap->maxElementCount)
 		return (FALSE);
-	// i == 4
 	int	i = pHeap->currentElementCount;
 	while (i != 0)
 	{
@@ -36,6 +38,7 @@ int	insertMinHeap(Heap *pHeap, HeapNode element)
 	pHeap->currentElementCount++;
 	return (TRUE);
 }
+// 가장 작은 key값을 가지는 맨 처음 노드를 pop
 HeapNode popMinHeapNode(Heap *pHeap)
 {
 	HeapNode popNode = pHeap->pElement[0];
@@ -44,20 +47,14 @@ HeapNode popMinHeapNode(Heap *pHeap)
 	pHeap->currentElementCount--;
 	int	i = pHeap->currentElementCount;
 	tmpNode = pHeap->pElement[i];
-	//마지막 노드를 맨 위로
-	// pHeap->pElement[0] = tmpNode;
-	//키값을 비교하며 이동
-	int parent, child;
-	parent = 0;
-	//child가 부모 자리에 올릴 노드!
-	child = 1;
-	// 1이 4가 될 때까지
+
+	int parent = 0;
+	int child = 1;
 	while (child <= pHeap->currentElementCount)
 	{
 		if (child < pHeap->currentElementCount
 			&& pHeap->pElement[child].key > pHeap->pElement[child + 1].key)
 			child += 1;
-		// 부모가 자식보다 작은 경우
 		if (tmpNode.key <= pHeap->pElement[child].key)
 			break;
 		pHeap->pElement[parent] = pHeap->pElement[child];
@@ -67,7 +64,7 @@ HeapNode popMinHeapNode(Heap *pHeap)
 	pHeap->pElement[parent] = tmpNode;
 	return (popNode);
 }
-//TRUE, FALSE //Heap자체를 삭제
+
 int	deleteMinHeap(Heap *pHeap)
 {
 	free(pHeap->pElement);
